@@ -1,6 +1,8 @@
 {
   "name": "analytics-debugger",
   "productName": "Analytics Debugger",
+  "description": "Desktop viewer for the rn-analytics-debugger mobile SDK",
+  "author": "Mahmoud Mabrok Maghrabia",
   "private": true,
   "version": "1.0.0",
   "main": "main.cjs",
@@ -17,6 +19,7 @@
   "build": {
     "appId": "com.mo3ta-dev.analytics-debugger",
     "productName": "Analytics Debugger",
+    "publish": "never",
     "directories": {
       "output": "release"
     },
@@ -56,12 +59,12 @@
     }
   },
   "dependencies": {
-    "electron": "^40.6.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "ws": "^8.19.0"
   },
   "devDependencies": {
+    "electron": "^40.6.1",
     "@eslint/js": "^9.13.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
