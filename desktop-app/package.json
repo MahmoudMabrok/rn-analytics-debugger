@@ -3,6 +3,7 @@
   "productName": "Analytics Debugger",
   "description": "Desktop viewer for the rn-analytics-debugger mobile SDK",
   "author": "Mahmoud Mabrok Maghrabia",
+  "repository": "https://github.com/MahmoudMabrok/rn-analytics-debugger",
   "private": true,
   "version": "1.0.0",
   "main": "main.cjs",
@@ -12,9 +13,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "package:mac": "npm run build && electron-builder --mac --publish never",
-    "package:win": "npm run build && electron-builder --win --publish never",
-    "package:all": "npm run build && electron-builder --mac --win --publish never"
+    "package:mac": "npm run build && electron-builder build--mac",
+    "package:win": "npm run build && electron-builder build--win",
+    "package:all": "npm run build && electron-builder build--mac --win"
   },
   "build": {
     "appId": "com.mo3ta-dev.analytics-debugger",
