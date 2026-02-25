@@ -12,14 +12,13 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "package:mac": "npm run build && electron-builder --mac",
-    "package:win": "npm run build && electron-builder --win",
-    "package:all": "npm run build && electron-builder --mac --win"
+    "package:mac": "npm run build && electron-builder --mac --publish never",
+    "package:win": "npm run build && electron-builder --win --publish never",
+    "package:all": "npm run build && electron-builder --mac --win --publish never"
   },
   "build": {
     "appId": "com.mo3ta-dev.analytics-debugger",
     "productName": "Analytics Debugger",
-    "publish": "never",
     "directories": {
       "output": "release"
     },
