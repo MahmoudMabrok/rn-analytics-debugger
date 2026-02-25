@@ -4,17 +4,18 @@ import { AnalyticsDebugger } from '../AnalyticsDebugger';
 import { DebuggerUI } from './DebuggerUI';
 
 export function DebuggerOverlay() {
-    const [visible, setVisible] = useState(AnalyticsDebugger.getInstance().isEnabled());
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        // Poll or subscribe to enabled state changes
-        // A simple fix for native reactivity since enabled is simply a boolean in config
-        const interval = setInterval(() => {
-            const isEnabled = AnalyticsDebugger.getInstance().isEnabled();
+        const checkVisibility = () => {
+            const isEnabled = !!AnalyticsDebugger.getInstance().isEnabled();
             if (isEnabled !== visible) {
                 setVisible(isEnabled);
             }
-        }, 1000); // Check every second, or better yet, we could trigger events on change
+        };
+
+        checkVisibility();
+        const interval = setInterval(checkVisibility, 2000); // Poll every 2s for UI toggle
 
         return () => clearInterval(interval);
     }, [visible]);
@@ -28,7 +29,7 @@ export function DebuggerOverlay() {
             </View>
         </View>
     );
-};
+}
 
 const { height, width } = Dimensions.get('window');
 

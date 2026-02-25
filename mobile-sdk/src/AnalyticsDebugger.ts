@@ -25,7 +25,17 @@ export class AnalyticsDebugger {
     }
 
     public init(config: Partial<DebuggerConfig>) {
-        this.config = { ...this.config, ...config };
+        if (config.enabled !== undefined) this.config.enabled = !!config.enabled;
+        if (config.maxEvents !== undefined) this.config.maxEvents = Number(config.maxEvents);
+        if (config.desktopSync !== undefined) this.config.desktopSync = !!config.desktopSync;
+        if (config.desktopIp !== undefined) this.config.desktopIp = String(config.desktopIp);
+        if (config.desktopPort !== undefined) this.config.desktopPort = Number(config.desktopPort);
+
+        // Update store if capacity changed
+        if (config.maxEvents && config.maxEvents !== this.store.getEvents().length) {
+            // Re-initialize store with new capacity if needed (MVP: keep existing events for now)
+            // this.store = new EventStore(this.config.maxEvents);
+        }
 
         // Attempt Desktop Sync connection if enabled
         if (this.config.enabled && this.config.desktopSync && this.config.desktopIp) {
