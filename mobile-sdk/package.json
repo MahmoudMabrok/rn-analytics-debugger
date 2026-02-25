@@ -1,5 +1,5 @@
 {
-  "name": "rn-analytics-debugger",
+  "name": "@mo3ta-dev/rn-analytics-debugger",
   "version": "1.0.0",
   "description": "Mobile-first analytics debugger for React Native with optional Desktop integration",
   "main": "lib/index.js",

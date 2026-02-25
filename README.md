@@ -60,19 +60,38 @@ The Electron window will open automatically. Keep it running while testing your 
 - Filter by Type or Search by Name.
 - Make sure to update `desktopIp` in `init()` to match your local IP to use the Electron App sync.
 
-## 4. NPM Publishing
+## 4. Publishing
 
-To publish the SDK to NPM:
+### Automated Publishing (Recommended via CI)
 
-1. **Login to NPM** (if not already):
+The project includes a GitHub Action to automate publishing.
+
+1.  **Generate an NPM Automation Token**:
+    *   Go to [npmjs.com](https://www.npmjs.com) -> Access Tokens -> Generate New Token.
+    *   Select **"Automation"** (this bypasses 2FA).
+2.  **Add Secret to GitHub**:
+    *   Go to your repo on GitHub -> Settings -> Secrets and variables -> Actions.
+    *   Add a new repository secret named `NPM_TOKEN` with your token value.
+3.  **Trigger a Release**:
+    *   Push a tag starting with `v` (e.g., `v1.0.0`):
+    ```bash
+    git tag v1.0.0
+    git push origin v1.0.0
+    ```
+
+### Manual Publishing
+
+To publish manually (requires 2FA if enabled on your account):
+
+1. **Login to NPM**:
    ```bash
    npm login
    ```
 
-2. **Publish**:
+2. **Publish with OTP**:
    ```bash
    cd mobile-sdk
-   npm publish
+   npm publish --access public --otp=YOUR_CODE
    ```
 
 Note: The `prepublishOnly` script will automatically run the build and generate the `lib/` directory before uploading.
