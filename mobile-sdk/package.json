@@ -1,0 +1,39 @@
+{
+  "name": "rn-analytics-debugger",
+  "version": "1.0.0",
+  "description": "Mobile-first analytics debugger for React Native with optional Desktop integration",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react-native",
+    "analytics",
+    "tealium",
+    "debug",
+    "debugger",
+    "electron"
+  ],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-native": "^0.73.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3"
+  }
+}

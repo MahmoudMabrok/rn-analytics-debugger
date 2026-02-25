@@ -1,0 +1,35 @@
+[
+    {
+        "id": "abc123x",
+        "timestamp": 1708848000000,
+        "type": "event",
+        "name": "login_click",
+        "provider": "Tealium",
+        "payload": {
+            "method": "email",
+            "screen": "Login"
+        }
+    },
+    {
+        "id": "def456y",
+        "timestamp": 1708848005000,
+        "type": "view",
+        "name": "dashboard_view",
+        "provider": "Tealium",
+        "payload": {
+            "user_tier": "premium",
+            "items_count": 12
+        }
+    },
+    {
+        "id": "hij789z",
+        "timestamp": 1708848010000,
+        "type": "error",
+        "name": "api_timeout",
+        "provider": "System",
+        "payload": {
+            "endpoint": "/v1/users/profile",
+            "timeoutBase": 5000
+        }
+    }
+]
