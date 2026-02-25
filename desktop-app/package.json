@@ -1,14 +1,59 @@
 {
-  "name": "desktop-app",
+  "name": "analytics-debugger",
+  "productName": "Analytics Debugger",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "main.cjs",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"vite\" \"cross-env NODE_ENV=development electron .\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "package:mac": "npm run build && electron-builder --mac",
+    "package:win": "npm run build && electron-builder --win",
+    "package:all": "npm run build && electron-builder --mac --win"
+  },
+  "build": {
+    "appId": "com.mo3ta-dev.analytics-debugger",
+    "productName": "Analytics Debugger",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "main.cjs",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "public/icon.icns"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
   },
   "dependencies": {
     "electron": "^40.6.1",
@@ -24,6 +69,7 @@
     "@vitejs/plugin-react": "^4.3.3",
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
+    "electron-builder": "^25.1.8",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
