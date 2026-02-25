@@ -14,12 +14,11 @@
   position: relative;
   background: #161B22;
   border-bottom: 1px solid #21262D;
+  -webkit-app-region: drag;
 }
 
 .titlebar-drag {
-  -webkit-app-region: drag;
-  position: absolute;
-  inset: 0;
+  display: none;
 }
 
 .titlebar-content {
@@ -27,8 +26,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  padding-left: 80px; /* space for macOS traffic lights */
-  -webkit-app-region: no-drag;
+  padding-left: 80px;
+  /* space for macOS traffic lights */
   position: relative;
   z-index: 1;
 }
@@ -302,8 +301,15 @@
 }
 
 @keyframes slideDown {
-  from { opacity: 0; max-height: 0; }
-  to { opacity: 1; max-height: 500px; }
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
 }
 
 .event-payload pre {
@@ -340,8 +346,17 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
 }
 
 .empty-state h3 {
@@ -393,6 +408,13 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
