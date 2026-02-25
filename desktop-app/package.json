@@ -13,9 +13,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "package:mac": "npm run build && electron-builder build--mac",
-    "package:win": "npm run build && electron-builder build--win",
-    "package:all": "npm run build && electron-builder build--mac --win"
+    "package:mac": "npm run build && electron-builder build --mac",
+    "package:win": "npm run build && electron-builder build --win",
+    "package:all": "npm run build && electron-builder build --mac --win"
   },
   "build": {
     "appId": "com.mo3ta-dev.analytics-debugger",
