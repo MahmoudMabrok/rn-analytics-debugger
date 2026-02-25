@@ -48,7 +48,17 @@ The "Brain" of the SDK. It manages:
 ### 2. `EventStore`
 A lightweight in-memory ring buffer that stores up to **1000 events** (configurable). It prevents memory leaks by automatically discarding the oldest events when the capacity is reached.
 
-### 3. `TealiumAdapter` & `wrapTealium`
+### 3. Default Tracker (Built-in)
+You can log events directly via `AnalyticsDebugger.getInstance()` without any adapter:
+```tsx
+const debugger = AnalyticsDebugger.getInstance();
+debugger.trackEvent('purchase', { amount: 99.99 });
+debugger.trackView('HomeScreen');
+debugger.trackError('network_timeout', { url: '/api/data' });
+```
+This works **alongside** any adapter (e.g., `wrapTealium`). Both the default tracker and the adapters feed into the same event store and UI.
+
+### 4. `TealiumAdapter` & `wrapTealium`
 - **`wrapTealium(instance)`**: Uses a transparent proxy pattern (monkey-patching) to intercept `.track()` calls. This is the recommended way to integrate as it requires **zero changes** to your tracking calls.
 - **`TealiumAdapter`**: A class-based alternative that implements the `AnalyticsProvider` interface.
 

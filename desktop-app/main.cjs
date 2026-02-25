@@ -4,18 +4,18 @@ const WebSocket = require('ws');
 
 let mainWindow;
 let wss;
-const wsClients = new Set();
 
 function createWebSocketServer() {
     wss = new WebSocket.Server({ port: 8080 });
 
     wss.on('connection', function connection(ws) {
         console.log('Mobile app connected');
-        wsClients.add(ws);
+        if (mainWindow) {
+            mainWindow.webContents.send('ws-status', 'connected');
+        }
 
         ws.on('message', function incoming(message) {
             const data = message.toString();
-            // Forward event to Electron renderer
             if (mainWindow) {
                 mainWindow.webContents.send('analytics-event', data);
             }
@@ -23,7 +23,9 @@ function createWebSocketServer() {
 
         ws.on('close', () => {
             console.log('Mobile app disconnected');
-            wsClients.delete(ws);
+            if (mainWindow) {
+                mainWindow.webContents.send('ws-status', 'disconnected');
+            }
         });
     });
 
@@ -32,19 +34,27 @@ function createWebSocketServer() {
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 1024,
-        height: 768,
+        width: 1100,
+        height: 750,
+        titleBarStyle: 'hiddenInset',
+        backgroundColor: '#0D1117',
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false, // For simplicity in MVP, disable context isolation to use ipcRenderer
+            contextIsolation: false,
         },
     });
 
-    // Check if we are in dev mode
     const isDev = process.env.NODE_ENV === 'development';
     if (isDev) {
-        mainWindow.loadURL('http://localhost:5173');
-        mainWindow.webContents.openDevTools();
+        // Wait for Vite to be ready, then try ports in order
+        const tryLoad = (ports, index) => {
+            if (index >= ports.length) return;
+            const url = `http://localhost:${ports[index]}`;
+            mainWindow.loadURL(url).catch(() => {
+                setTimeout(() => tryLoad(ports, index + 1), 500);
+            });
+        };
+        setTimeout(() => tryLoad([5173, 5174, 5175, 5176], 0), 1500);
     } else {
         mainWindow.loadFile(path.join(__dirname, 'dist', 'index.html'));
     }

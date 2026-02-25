@@ -52,6 +52,28 @@ export class AnalyticsDebugger {
         return this.store;
     }
 
+    /**
+     * Track a custom event directly without any adapter.
+     * Use this alongside adapters like TealiumAdapter for standalone logging.
+     */
+    public trackEvent(name: string, payload?: Record<string, any>, provider: string = 'Debugger') {
+        this.logEvent({ name, type: 'event', payload, provider });
+    }
+
+    /**
+     * Track a view/screen directly without any adapter.
+     */
+    public trackView(name: string, payload?: Record<string, any>, provider: string = 'Debugger') {
+        this.logEvent({ name, type: 'view', payload, provider });
+    }
+
+    /**
+     * Track an error directly without any adapter.
+     */
+    public trackError(name: string, payload?: Record<string, any>, provider: string = 'Debugger') {
+        this.logEvent({ name, type: 'error', payload, provider });
+    }
+
     public logEvent(data: Omit<BaseEvent, 'id' | 'timestamp'>) {
         if (!this.config.enabled) return;
 
