@@ -4,7 +4,7 @@ import { View, Text, Button, SafeAreaView } from 'react-native';
 // Import SDK
 import {
     AnalyticsDebugger,
-    DebuggerOverlay,
+    AnalyticsDebuggerDialog,
     enableMobileUI,
     TealiumAdapter
 } from './src/index';
@@ -76,8 +76,8 @@ export default function App() {
                 )}
             </View>
 
-            {/* 2. Add Overlay at the root level of your app */}
-            <DebuggerOverlay />
+            {/* 3. Render the overlay component anywhere in your app root */}
+            <AnalyticsDebuggerDialog />
         </SafeAreaView>
     );
 }

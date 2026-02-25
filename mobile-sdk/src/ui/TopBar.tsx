@@ -5,7 +5,6 @@ interface TopBarProps {
     onClear: () => void;
     onPauseToggle: () => void;
     isPaused: boolean;
-    onClose: () => void;
     onSearch: (text: string) => void;
     onFilterChange: (filter: 'all' | 'event' | 'view' | 'error') => void;
     currentFilter: 'all' | 'event' | 'view' | 'error';
@@ -15,7 +14,6 @@ export function TopBar({
     onClear,
     onPauseToggle,
     isPaused,
-    onClose,
     onSearch,
     onFilterChange,
     currentFilter
@@ -24,9 +22,6 @@ export function TopBar({
         <View style={styles.container}>
             <View style={styles.row}>
                 <Text style={styles.title}>Analytics Debugger</Text>
-                <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-                    <Text style={styles.buttonText}>Close</Text>
-                </TouchableOpacity>
             </View>
             <View style={styles.row}>
                 <TextInput

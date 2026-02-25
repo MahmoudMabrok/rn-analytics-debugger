@@ -5,7 +5,7 @@ import { BaseEvent } from '../types';
 import { TopBar } from './TopBar';
 import { EventItem } from './EventItem';
 
-export function DebuggerUI() {
+export function AnalyticsDebuggerView() {
     const [events, setEvents] = useState<BaseEvent[]>([]);
     const [isPaused, setIsPaused] = useState(false);
     const [search, setSearch] = useState('');
@@ -28,10 +28,6 @@ export function DebuggerUI() {
         AnalyticsDebugger.getInstance().getStore().clearEvents();
     };
 
-    const handleClose = () => {
-        AnalyticsDebugger.getInstance().enableMobileUI(false);
-    };
-
     const filteredEvents = events.filter((e) => {
         if (filter !== 'all' && e.type !== filter) return false;
         if (search && !e.name.toLowerCase().includes(search.toLowerCase())) return false;
@@ -44,7 +40,6 @@ export function DebuggerUI() {
                 onClear={handleClear}
                 onPauseToggle={() => setIsPaused(!isPaused)}
                 isPaused={isPaused}
-                onClose={handleClose}
                 onSearch={setSearch}
                 onFilterChange={setFilter}
                 currentFilter={filter}

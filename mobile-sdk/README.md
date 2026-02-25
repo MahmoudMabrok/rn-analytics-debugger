@@ -18,7 +18,7 @@ graph TD
         Proxy["wrapTealium() / Proxy"]
         Debugger[AnalyticsDebugger Singleton]
         Store[EventStore - Ring Buffer]
-        UI[DebuggerOverlay / React UI]
+        UI[AnalyticsDebuggerDialog / React UI]
         WS[WebSocket Client]
     end
 
@@ -63,8 +63,8 @@ This works **alongside** any adapter (e.g., `wrapTealium`). Both the default tra
 - **`TealiumAdapter`**: A class-based alternative that implements the `AnalyticsProvider` interface.
 
 ### 4. Mobile UI Components
-- **`DebuggerOverlay`**: A floating component that renders on top of the app. It listens to the `AnalyticsDebugger` for status changes.
-- **`DebuggerUI`**: The primary dashboard containing the event list and filters.
+- **`AnalyticsDebuggerDialog`**: A floating component that renders on top of the app. It listens to the `AnalyticsDebugger` for status changes.
+- **`AnalyticsDebuggerView`**: The primary dashboard containing the event list and filters.
 - **`JSONViewer`**: A recursive component for deep inspection of event payloads.
 
 ## 🛠 Tech Stack

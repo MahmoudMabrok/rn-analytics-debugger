@@ -1,9 +1,9 @@
 import 'react-native-screens';
 import { enableScreens } from 'react-native-screens';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AnalyticsDebugger } from '@mo3ta-dev/rn-analytics-debugger';
+import { AnalyticsDebugger, AnalyticsDebuggerDialog } from '@mo3ta-dev/rn-analytics-debugger';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { DetailsScreen } from './src/screens/DetailsScreen';
 
@@ -18,6 +18,8 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
+    const [debuggerVisible, setDebuggerVisible] = useState(false);
+
     useEffect(() => {
         AnalyticsDebugger.getInstance().init({
             enabled: true,
@@ -28,18 +30,31 @@ export default function App() {
     }, []);
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen
-                    name="Home"
-                    component={HomeScreen}
-                    options={{ title: 'SDK Debugger Demo' }}
+        <>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Home">
+                    <Stack.Screen
+                        name="Home"
+                        component={() => (
+                            <HomeScreen
+                                onOpenDebugger={() => setDebuggerVisible(true)}
+                            />
+                        )}
+                        options={{ title: 'SDK Debugger Demo' }}
+                    />
+                    <Stack.Screen
+                        name="Details"
+                        component={DetailsScreen}
+                    />
+                </Stack.Navigator>
+            </NavigationContainer>
+
+            {
+                debuggerVisible && <AnalyticsDebuggerDialog
+                    onClose={() => setDebuggerVisible(false)}
                 />
-                <Stack.Screen
-                    name="Details"
-                    component={DetailsScreen}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
+            }
+
+        </>
     );
 }

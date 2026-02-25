@@ -1,12 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AnalyticsDebugger, wrapTealium } from '@mo3ta-dev/rn-analytics-debugger';
-import { RootStackParamList } from '../../App';
 
-type HomeScreenProps = {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
-};
+interface HomeScreenProps {
+    onOpenDebugger: () => void;
+}
 
 // Mock Tealium SDK (replace with yours if you have it)
 const originalTealium = {
@@ -18,7 +16,7 @@ const originalTealium = {
 // Wrapped so all track() calls are auto-captured by the debugger
 const tealium = wrapTealium(originalTealium);
 
-export function HomeScreen({ navigation }: HomeScreenProps) {
+export function HomeScreen({ onOpenDebugger }: HomeScreenProps) {
     const handleDefaultTrack = () => {
         AnalyticsDebugger.getInstance().trackEvent('button_clicked', {
             source: 'HomeScreen',
@@ -58,11 +56,10 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
                 <Text style={styles.buttonText}>⚠️ Track Error</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-                style={[styles.button, styles.navButton]}
-                onPress={() => navigation.navigate('Details')}
-            >
-                <Text style={styles.buttonText}>📱 Go to Details (Track View)</Text>
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={[styles.button, styles.debuggerButton]} onPress={onOpenDebugger}>
+                <Text style={styles.buttonText}>🛠 Open Debugger UI</Text>
             </TouchableOpacity>
         </View>
     );
@@ -102,7 +99,13 @@ const styles = StyleSheet.create({
     },
     proxyButton: { backgroundColor: '#34C759', shadowColor: '#34C759' },
     errorButton: { backgroundColor: '#FF3B30', shadowColor: '#FF3B30' },
-    navButton: { backgroundColor: '#5856D6', shadowColor: '#5856D6', marginTop: 20 },
+    debuggerButton: { backgroundColor: '#1C1C1E', shadowColor: '#000' },
+    divider: {
+        height: 1,
+        backgroundColor: '#D1D1D6',
+        marginVertical: 20,
+        marginHorizontal: 40,
+    },
     buttonText: {
         color: '#fff',
         fontSize: 16,
