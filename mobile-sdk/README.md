@@ -7,34 +7,8 @@ The internal logic and UI for the React Native Analytics Debugger.
 The SDK is built on a **Proxy/Adapter pattern** to intercept analytics events without requiring changes to existing business logic.
 
 ### High-Level Data Flow
+<img width="4800" height="3200" alt="diagram-4x" src="https://github.com/user-attachments/assets/bdd479ea-398b-43c2-b1af-2dc7729d5a0f" />
 
-```mermaid
-graph TD
-    subgraph "Client App"
-        Code[Existing Business Logic]
-    end
-
-    subgraph "Mobile SDK"
-        Proxy["wrapTealium() / Proxy"]
-        Debugger[AnalyticsDebugger Singleton]
-        Store[EventStore - Ring Buffer]
-        UI[AnalyticsDebuggerDialog / React UI]
-        WS[WebSocket Client]
-    end
-
-    subgraph "External"
-        Tealium[Real Tealium SDK]
-        Desktop[Desktop Viewer App]
-    end
-
-    Code -->|track call| Proxy
-    Proxy -->|Log Event| Debugger
-    Proxy -->|Forward| Tealium
-    Debugger -->|Push| Store
-    Debugger -->|Broadcast| WS
-    Store -->|Sync State| UI
-    WS -.->|WebSocket| Desktop
-```
 
 ## 📦 Key Components
 
