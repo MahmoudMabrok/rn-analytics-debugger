@@ -7,7 +7,7 @@ The internal logic and UI for the React Native Analytics Debugger.
 The SDK is built on a **Proxy/Adapter pattern** to intercept analytics events without requiring changes to existing business logic.
 
 ### High-Level Data Flow
-<img width="4800" height="3200" alt="diagram-4x" src="https://github.com/user-attachments/assets/bdd479ea-398b-43c2-b1af-2dc7729d5a0f" />
+<img width="1536" height="1024" alt="ChatGPT Image Mar 3, 2026, 01_06_24 AM" src="https://github.com/user-attachments/assets/48b0d225-1b58-41e1-9b08-c92a4895dd8b" />
 
 
 ## 📦 Key Components
