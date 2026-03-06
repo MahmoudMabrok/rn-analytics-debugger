@@ -2,7 +2,16 @@
 
 A mobile-first debugger SDK for tracking analytics events (like Tealium) in React Native apps, with an optional real-time Desktop Electron viewer.
 
-## Features
+---
+
+## 📂 Project Structure
+
+This is a monorepo consisting of:
+- **`mobile-sdk/`**: The core logic and UI components for the React Native debugger.
+- **`desktop-app/`**: A Vite + Electron application that serves as a remote viewer for events.
+- **`sample-app/`**: An Expo-based demonstration app showing how to integrate the SDK.
+
+## ✨ Features
 - **Mobile UI**: Built-in dark-themed overlay to view, filter, and inspect events natively on your device/simulator.
 - **Provider Pattern**: Ships with a mock Tealium Adapter, easily extensible to Firebase, Segment, etc.
 - **Desktop Sync**: Sends events to a local Electron + React app via WebSockets.
