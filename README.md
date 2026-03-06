@@ -10,7 +10,7 @@ A mobile-first debugger SDK for tracking analytics events (like Tealium) in Reac
 
 ## 1. Mobile SDK Setup
 
-### Install
+### Install 
 ```bash
 cd mobile-sdk
 npm install
@@ -18,6 +18,8 @@ npm install
 
 ### Integration
 Add the initialization and the `DebuggerOverlay` at the root of your app. See `example_usage.tsx` for a complete example.
+
+install from npm [latest](https://www.npmjs.com/package/@mo3ta-dev/rn-analytics-debugger)
 
 ```tsx
 import { AnalyticsDebugger, DebuggerOverlay, wrapTealium } from 'rn-analytics-debugger';
